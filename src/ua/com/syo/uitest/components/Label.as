@@ -11,6 +11,7 @@ package ua.com.syo.uitest.components
 		
 		protected var _autoSize:Boolean = true;
 		protected var _text:String = "";
+		protected var _textFormat:TextFormat;
 		protected var _tf:TextField;
 		
 		public function Label(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, text:String = "")
@@ -34,10 +35,17 @@ package ua.com.syo.uitest.components
 			_tf.embedFonts = Style.embedFonts;
 			_tf.selectable = false;
 			_tf.mouseEnabled = false;
-			_tf.defaultTextFormat = new TextFormat(Style.fontName, Style.fontSize, Style.LABEL_TEXT);
+			if (_textFormat == null) _textFormat = new TextFormat(Style.fontName, Style.fontSize, Style.LABEL_TEXT);
+			_tf.defaultTextFormat = _textFormat;
 			_tf.text = _text;			
 			addChild(_tf);
 			draw();
+		}
+		
+		public function setTextFormat(tf:TextFormat):void
+		{
+			_textFormat = tf
+			addChildren();
 		}
 		
 		override public function draw():void

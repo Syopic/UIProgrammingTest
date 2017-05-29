@@ -3,16 +3,17 @@ package {
 	import com.adobe.serialization.json.JSON;
 	
 	import flash.display.Sprite;
+	import flash.display.StageQuality;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
-	import ua.com.syo.uitest.components.Accordion;
 	import ua.com.syo.uitest.components.ScrollPane;
+	import ua.com.syo.uitest.model.DataStorage;
 	import ua.com.syo.uitest.model.Record;
-	import ua.com.syo.uitest.view.CategoryView;
+	import ua.com.syo.uitest.view.ExpandingListView;
 
-	[SWF(frameRate = "60", width = "640", height = "640", backgroundColor = "0xcccccc")]
+	[SWF(frameRate = "60", width = "800", height = "700", backgroundColor = "0xcccccc")]
 	public class UIProgrammingTest extends Sprite {
 		
 		private var _jsonPath:String = "data/music.json";
@@ -27,7 +28,8 @@ package {
 		}
 
 		private function init(event:Event = null):void {
-			//this.scaleX = this.scaleY = 2;
+			this.scaleX = this.scaleY = 1.2;
+			stage.quality = StageQuality.HIGH_16X16;
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			var loader:URLLoader = new URLLoader();
 			var request:URLRequest = new URLRequest();
@@ -38,25 +40,22 @@ package {
 
 
 		private function onLoaderComplete(e:Event):void {
-			var loader:URLLoader = URLLoader(e.target);
-			var json:Object = com.adobe.serialization.json.JSON.decode(loader.data);
-			var list:Array = json.list;
-			for (var i:int = 0; i < list.length; i++) 
-			{
-				_records.push(new Record(list[i].category, list[i].subcategory, list[i].name));
-			}
+			
+			DataStorage.setData(com.adobe.serialization.json.JSON.decode(URLLoader(e.target).data).list);
 			showGUI();
 		}
 		
 		private function showGUI():void {
 			
-			//var panel:ScrollPane = new ScrollPane(this, 10, 10);
-			//panel.setSize(200, 350);
+			var panel:ScrollPane = new ScrollPane(this, 10, 10);
+			panel.setSize(250, 400);
 
-			var accordion:Accordion = new Accordion(this, 0, 0);
-			accordion.width = 200;
+			var expandingView:ExpandingListView = new ExpandingListView(panel, 0, 0);
+			expandingView.setData(DataStorage.getCategories());
+			expandingView.width = 250;
 
 
+			/*
 			var category1:CategoryView = new CategoryView(null, 0, 0, "Test Category1", new Array("Item1", "Item2", "Item3", "Item4", "Item3", "Item4"));
 			accordion.addCategory(category1, 0);
 
@@ -68,7 +67,7 @@ package {
 
 			var category4:CategoryView = new CategoryView(null, 0, 0, "Test Category4", new Array("Item1", "Item2", "Item3", "Item4", "Item3", "Item4"));
 			accordion.addCategory(category4, 3);
-
+			*/
 
 
 		/*var window:Window = new Window(null, 0, 0, "Test Window");
@@ -108,4 +107,5 @@ package {
 
 		}
 	}
+	
 }

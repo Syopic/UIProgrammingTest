@@ -42,7 +42,7 @@ package ua.com.syo.uitest.components
 		protected override function addChildren() : void
 		{
 			super.addChildren();
-			_label = new Label(this, 5, 3);
+			_label = new Label(this, 5, 1);
             _label.draw();
 		}
 		

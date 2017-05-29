@@ -3,7 +3,6 @@ package ua.com.syo.uitest.components
 {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -19,7 +18,6 @@ package ua.com.syo.uitest.components
 		protected var _panel:Panel;
 		protected var _color:int = -1;
 		protected var _shadow:Boolean = true;
-		protected var _draggable:Boolean = true;
 		protected var _minimizeButton:Sprite;
 		protected var _hasMinimizeButton:Boolean = true;
 		protected var _minimized:Boolean = false;
@@ -59,7 +57,7 @@ package ua.com.syo.uitest.components
 			_titleBar.addEventListener(MouseEvent.MOUSE_DOWN, onMouseGoDown);
 			_titleBar.height = 20;
 			super.addChild(_titleBar);
-			_titleLabel = new Label(_titleBar.content, 5, 1, _title);
+			_titleLabel = new Label(_titleBar.content, 5, 2, _title);
 			
 			_panel = new Panel(null, 0, 20);
 			_panel.visible = !_minimized;
@@ -116,7 +114,7 @@ package ua.com.syo.uitest.components
 			_panel.color = _color;
 			_titleBar.width = width;
 			_titleBar.draw();
-			_titleLabel.x = _hasMinimizeButton ? 20 : 5;
+			//_titleLabel.x = _hasMinimizeButton ? 20 : 5;
 			_panel.setSize(_width, _height - 20);
 			_panel.draw();
 		}
@@ -132,13 +130,7 @@ package ua.com.syo.uitest.components
 		 */
 		protected function onMouseGoDown(event:MouseEvent):void
 		{
-			if(_draggable)
-			{
-				this.startDrag();
-				stage.addEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
-				parent.addChild(this); // move to top
-			}
-			dispatchEvent(new Event(Event.SELECT));
+			dispatchEvent(new Event(Event.CHANGE));
 		}
 		
 		/**
@@ -147,7 +139,6 @@ package ua.com.syo.uitest.components
 		 */
 		protected function onMouseGoUp(event:MouseEvent):void
 		{
-			this.stopDrag();
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
 		}
 		

@@ -18,7 +18,7 @@ package ua.com.syo.uitest.components
 		public static var LIST_ROLLOVER:uint = 0XDDDDDD;
 		
 		public static var embedFonts:Boolean = false;
-		public static var fontName:String = "Consolas";
+		public static var fontName:String = "Tahoma";
 		public static var fontSize:Number = 11;
 		
 		public static const DARK:String = "dark";
