@@ -1,15 +1,18 @@
-package ua.com.syo.uitest.components
+package ua.com.syo.uitest.view
 {
 	import flash.display.DisplayObjectContainer;
+	import ua.com.syo.uitest.components.Label;
+	import ua.com.syo.uitest.components.List;
+	import ua.com.syo.uitest.components.Window;
 	
-	public class Category extends Window
+	public class CategoryView extends Window
 	{
 		private var _titleLabel:Label;
 		private var _list:List;
 		private var _items:Array;
 		
 		
-		public function Category(parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0, title:String="Window", items:Array = null)
+		public function CategoryView(parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0, title:String="Window", items:Array = null)
 		{
 			if(items != null)
 				_items = items;

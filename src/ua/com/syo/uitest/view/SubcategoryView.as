@@ -1,10 +1,13 @@
-package ua.com.syo.uitest.components
+package ua.com.syo.uitest.view
 {
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
+	import ua.com.syo.uitest.components.Label;
+	import ua.com.syo.uitest.components.List;
+	import ua.com.syo.uitest.components.Panel;
 	
-	public class Subcategory extends Panel
+	public class SubcategoryView extends Panel
 	{
 		
 		private var _titleLabel:Label;
@@ -15,7 +18,7 @@ package ua.com.syo.uitest.components
 		 * @param xpos The x position to place this component.
 		 * @param ypos The y position to place this component.
 		 */
-		public function Subcategory(parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0)
+		public function SubcategoryView(parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0)
 		{
 			super(parent, xpos, ypos);
 		}

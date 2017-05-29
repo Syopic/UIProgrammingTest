@@ -4,6 +4,8 @@ package ua.com.syo.uitest.components
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	
+	import ua.com.syo.uitest.model.Record;
+	
 	public class Accordion extends Component
 	{
 		protected var _parent:DisplayObjectContainer;
@@ -13,12 +15,6 @@ package ua.com.syo.uitest.components
 		protected var _winHeight:Number = 100;
 		protected var _vbox:VBox;
 		
-		/**
-		 * Constructor
-		 * @param parent The parent DisplayObjectContainer on which to add this Panel.
-		 * @param xpos The x position to place this component.
-		 * @param ypos The y position to place this component.
-		 */
 		public function Accordion(parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0)
 		{
 			_parent = parent;
@@ -29,6 +25,15 @@ package ua.com.syo.uitest.components
 		{
 			_vbox = new VBox(this);
 			_windows = new Array();
+		}
+		
+		public function setData(list:Vector.<Record>):void
+		{
+			for (var i:int = 0; i < list.length; i++) 
+			{
+				
+			}
+			
 		}
 		
 		public function addCategory(window:Window, index):void
@@ -58,7 +63,7 @@ package ua.com.syo.uitest.components
 		{
 			var window:Window = event.target as Window;
 			window.minimized = !window.minimized;
-			(_parent as Component).draw();
+			if (_parent is Component)(_parent as Component).draw();
 		}
 		
 		public override function set width(w:Number):void
