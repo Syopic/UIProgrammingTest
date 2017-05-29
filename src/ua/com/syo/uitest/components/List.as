@@ -13,7 +13,6 @@
 		protected var _panel:Panel;
 		protected var _listItemHeight:Number = 20;
 		protected var _listItemClass:Class =ListItem;
-		protected var _scrollbar:VScrollBar;
 		protected var _selectedIndex:int = -1;
 		protected var _defaultColor:uint = Style.LIST_DEFAULT;
 		protected var _alternateColor:uint = Style.LIST_ALTERNATE;
@@ -47,11 +46,12 @@
 		protected override function init() : void
 		{
 			super.init();
-			setSize(100, 100);
+			//setSize(100, 100);
 			addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
             addEventListener(Event.RESIZE, onResize);
             makeListItems();
             fillItems();
+			
 		}
 		
 		/**
@@ -61,11 +61,9 @@
 		{
 			super.addChildren();
 			_panel = new Panel(this, 0, 0);
-			_panel.color = _defaultColor;
+			_panel.color = 0xff0000;
 			_itemHolder = new Sprite();
 			_panel.content.addChild(_itemHolder);
-			_scrollbar = new VScrollBar(this, 0, 0, onScroll);
-            _scrollbar.setSliderParams(0, 0, 0);
 		}
 		
 		/**
@@ -97,17 +95,18 @@
 			}
 		}
 
+		
         protected function fillItems():void
         {
-            var offset:int = _scrollbar.value;
             var numItems:int = Math.ceil(_height / _listItemHeight);
 			numItems = Math.min(numItems, _items.length);
             for(var i:int = 0; i < numItems; i++)
             {
                 var item:ListItem = _itemHolder.getChildAt(i) as ListItem;
-				if(offset + i < _items.length)
+				item.data = _items[i];
+				if(i < _items.length)
 				{
-	                item.data = _items[offset + i];
+	                item.data = _items[i];
 				}
 				else
 				{
@@ -115,13 +114,13 @@
 				}
 				if(_alternateRows)
 				{
-					item.defaultColor = ((offset + i) % 2 == 0) ? _defaultColor : _alternateColor;
+					item.defaultColor = ((i) % 2 == 0) ? _defaultColor : _alternateColor;
 				}
 				else
 				{
 					item.defaultColor = _defaultColor;
 				}
-                if(offset + i == _selectedIndex)
+                if(i == _selectedIndex)
                 {
                     item.selected = true;
                 }
@@ -135,26 +134,6 @@
 		/**
 		 * If the selected item is not in view, scrolls the list to make the selected item appear in the view.
 		 */
-		protected function scrollToSelection():void
-		{
-            var numItems:int = Math.ceil(_height / _listItemHeight);
-			if(_selectedIndex != -1)
-			{
-				if(_scrollbar.value > _selectedIndex)
-				{
-//                    _scrollbar.value = _selectedIndex;
-				}
-				else if(_scrollbar.value + numItems < _selectedIndex)
-				{
-                    _scrollbar.value = _selectedIndex - numItems + 1;
-				}
-			}
-			else
-			{
-				_scrollbar.value = 0;
-			}
-            fillItems();
-		}
 		
 		
 		
@@ -173,12 +152,12 @@
 
 
 			// panel
-			_panel.setSize(_width, _height);
+			_panel.setSize(_width, _items.length * _listItemHeight);
 			_panel.color = _defaultColor;
 			_panel.draw();
 			
 			// scrollbar
-			_scrollbar.x = _width - 10;
+			/*_scrollbar.x = _width - 10;
 			var contentHeight:Number = _items.length * _listItemHeight;
 			_scrollbar.setThumbPercent(_height / contentHeight); 
 			var pageSize:Number = Math.floor(_height / _listItemHeight);
@@ -186,7 +165,7 @@
 			_scrollbar.pageSize = pageSize;
 			_scrollbar.height = _height;
 			_scrollbar.draw();
-            scrollToSelection();
+            scrollToSelection();*/
 		}
 		
 		/**
@@ -265,11 +244,9 @@
 		{
 			if(! (event.target is ListItem)) return;
 			
-			var offset:int = _scrollbar.value;
-			
 			for(var i:int = 0; i < _itemHolder.numChildren; i++)
 			{
-				if(_itemHolder.getChildAt(i) == event.target) _selectedIndex = i + offset;
+				if(_itemHolder.getChildAt(i) == event.target) _selectedIndex = i;
 				ListItem(_itemHolder.getChildAt(i)).selected = false;
 			}
 			ListItem(event.target).selected = true;
@@ -289,7 +266,6 @@
 		 */
 		protected function onMouseWheel(event:MouseEvent):void
 		{
-			_scrollbar.value -= event.delta;
             fillItems();
 		}
 
@@ -451,18 +427,6 @@
 		{
 			return _alternateRows;
 		}
-
-        /**
-         * Sets / gets whether the scrollbar will auto hide when there is nothing to scroll.
-         */
-        public function set autoHideScrollBar(value:Boolean):void
-        {
-            _scrollbar.autoHide = value;
-        }
-        public function get autoHideScrollBar():Boolean
-        {
-            return _scrollbar.autoHide;
-        }
 
 	}
 }

@@ -21,11 +21,9 @@ package ua.com.syo.uitest.components
 		protected var _shadow:Boolean = true;
 		protected var _draggable:Boolean = true;
 		protected var _minimizeButton:Sprite;
-		protected var _hasMinimizeButton:Boolean = false;
+		protected var _hasMinimizeButton:Boolean = true;
 		protected var _minimized:Boolean = false;
 		protected var _hasCloseButton:Boolean;
-		protected var _closeButton:Button;
-		protected var _grips:Shape;
 		
 		
 		/**
@@ -47,7 +45,6 @@ package ua.com.syo.uitest.components
 		override protected function init():void
 		{
 			super.init();
-			setSize(100, 100);
 		}
 		
 		/**
@@ -63,19 +60,6 @@ package ua.com.syo.uitest.components
 			_titleBar.height = 20;
 			super.addChild(_titleBar);
 			_titleLabel = new Label(_titleBar.content, 5, 1, _title);
-			
-			_grips = new Shape();
-			for(var i:int = 0; i < 4; i++)
-			{
-				_grips.graphics.lineStyle(1, 0xffffff, .55);
-				_grips.graphics.moveTo(0, 3 + i * 4);
-				_grips.graphics.lineTo(100, 3 + i * 4);
-				_grips.graphics.lineStyle(1, 0, .125);
-				_grips.graphics.moveTo(0, 4 + i * 4);
-				_grips.graphics.lineTo(100, 4 + i * 4);
-			}
-			_titleBar.content.addChild(_grips);
-			_grips.visible = false;
 			
 			_panel = new Panel(null, 0, 20);
 			_panel.visible = !_minimized;
@@ -96,9 +80,6 @@ package ua.com.syo.uitest.components
 			_minimizeButton.useHandCursor = true;
 			_minimizeButton.buttonMode = true;
 			_minimizeButton.addEventListener(MouseEvent.CLICK, onMinimize);
-			
-			_closeButton = new Button(null, 86, 6, "", onClose);
-			_closeButton.setSize(8, 8);
 			
 			filters = [getShadow(4, false)];
 		}
@@ -136,16 +117,6 @@ package ua.com.syo.uitest.components
 			_titleBar.width = width;
 			_titleBar.draw();
 			_titleLabel.x = _hasMinimizeButton ? 20 : 5;
-			_closeButton.x = _width - 14;
-			_grips.x = _titleLabel.x + _titleLabel.width;
-			if(_hasCloseButton)
-			{
-				_grips.width = _closeButton.x - _grips.x - 2;
-			}
-			else
-			{
-				_grips.width = _width - _grips.x - 2;
-			}
 			_panel.setSize(_width, _height - 20);
 			_panel.draw();
 		}
@@ -249,20 +220,6 @@ package ua.com.syo.uitest.components
 		}
 		
 		/**
-		 * Sets / gets whether or not the window will be draggable by the title bar.
-		 */
-		public function set draggable(b:Boolean):void
-		{
-			_draggable = b;
-			_titleBar.buttonMode = _draggable;
-			_titleBar.useHandCursor = _draggable;
-		}
-		public function get draggable():Boolean
-		{
-			return _draggable;
-		}
-		
-		/**
 		 * Gets / sets whether or not the window will show a minimize button that will toggle the window open and closed. A closed window will only show the title bar.
 		 */
 		public function set hasMinimizeButton(b:Boolean):void
@@ -323,28 +280,6 @@ package ua.com.syo.uitest.components
 		}
 
 		/**
-		 * Sets / gets whether or not the window will display a close button.
-		 * Close button merely dispatches a CLOSE event when clicked. It is up to the developer to handle this event.
-		 */
-		public function set hasCloseButton(value:Boolean):void
-		{
-			_hasCloseButton = value;
-			if(_hasCloseButton)
-			{
-				_titleBar.content.addChild(_closeButton);
-			}
-			else if(_titleBar.content.contains(_closeButton))
-			{
-				_titleBar.content.removeChild(_closeButton);
-			}
-			invalidate();
-		}
-		public function get hasCloseButton():Boolean
-		{
-			return _hasCloseButton;
-		}
-
-		/**
 		 * Returns a reference to the title bar for customization.
 		 */
 		public function get titleBar():Panel
@@ -355,15 +290,6 @@ package ua.com.syo.uitest.components
 		{
 			_titleBar = value;
 		}
-
-		/**
-		 * Returns a reference to the shape showing the grips on the title bar. Can be used to do custom drawing or turn them invisible.
-		 */		
-		public function get grips():Shape
-		{
-			return _grips;
-		}
-
 
 	}
 }

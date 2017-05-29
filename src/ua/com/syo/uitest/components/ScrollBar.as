@@ -15,7 +15,7 @@ package ua.com.syo.uitest.components
 		protected const UP:String = "up";
 		protected const DOWN:String = "down";
 
-        protected var _autoHide:Boolean = false;
+        protected var _autoHide:Boolean = true;
 		protected var _upButton:Button;
 		protected var _downButton:Button;
 		protected var _scrollSlider:ScrollSlider;
