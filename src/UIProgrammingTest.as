@@ -15,25 +15,25 @@ package {
 	import ua.com.syo.uitest.components.CheckBox;
 	import ua.com.syo.uitest.components.InputText;
 	import ua.com.syo.uitest.components.Panel;
-	import ua.com.syo.uitest.components.ScrollPane;
-	import ua.com.syo.uitest.components.Text;
 	import ua.com.syo.uitest.components.TextArea;
 	import ua.com.syo.uitest.model.DataStorage;
 	import ua.com.syo.uitest.model.Item;
 	import ua.com.syo.uitest.model.Record;
 	import ua.com.syo.uitest.view.ExpandingListView;
 
-	[SWF(frameRate = "60", width = "800", height = "700", backgroundColor = "0xcccccc")]
+	[SWF(frameRate = "60", width = "900", height = "700", backgroundColor = "0xcccccc")]
 	public class UIProgrammingTest extends Sprite {
 
 		private var _jsonPath:String = "data/music.json";
-		private var componentWidth:int = 250;
-		private var componentHeight:int = 400;
-
-
-
-
-
+		
+		private var imgPanel:Panel;
+		private var expandingView:ExpandingListView;
+		private var checkBox:CheckBox;
+		private var filterIT:InputText;
+		private var itemIT:InputText;
+		private var textArea:TextArea;
+		private var addButton:Button;
+		private var removeButton:Button;
 
 		public function UIProgrammingTest() {
 			if (stage) {
@@ -44,7 +44,7 @@ package {
 		}
 
 		private function init(event:Event = null):void {
-			//this.scaleX = this.scaleY = 1.2;
+			this.scaleX = this.scaleY = 1.6;
 			stage.quality = StageQuality.HIGH_16X16;
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			var loader:URLLoader = new URLLoader();
@@ -61,13 +61,7 @@ package {
 			showGUI();
 		}
 
-
-		private var imgPanel:Panel;
-		private var expandingView:ExpandingListView;
-		private var checkBox:CheckBox;
-		private var filterIT:InputText;
-		private var itemIT:InputText;
-		private var textArea:TextArea;
+		
 
 		private function hideSubCheckBoxHandler(event:MouseEvent):void {
 			trace(checkBox.selected);
@@ -87,8 +81,10 @@ package {
 					expandingView.setData(DataStorage.getCategories("date"));
 					break;
 				case "Clear Filter":
-					filterIT.text = "";
-					onFilterChangeHandler(null);
+					if (filterIT.text != "") {
+						filterIT.text = "";
+						onFilterChangeHandler(null);
+					}
 					break;
 				case "Add":
 					if (expandingView.selectedItem && itemIT.text != "") {
@@ -96,13 +92,16 @@ package {
 						DataStorage.addItem(new Record(record.category, record.subcategory, itemIT.text));
 						itemIT.text = "";
 						expandingView.setData(DataStorage.getCategories());
+						removeButton.enabled = false;
 					}
+					onNameChangeHandler(null);
 					break;
 				case "Remove":
 					if (expandingView.selectedItem) {
 						record = DataStorage.getItemByName(expandingView.selectedItem.name);
 						DataStorage.removeItem(new Record(record.category, record.subcategory, record.name));
 						expandingView.setData(DataStorage.getCategories());
+						removeButton.enabled = false;
 					}
 					break;
 
@@ -111,13 +110,17 @@ package {
 		}
 
 		private function onFilterChangeHandler(event:Event):void {
-			DataStorage.fillData(filterIT.text);
+			DataStorage.parseData(filterIT.text);
 			expandingView.setData(DataStorage.getCategories());
 			expandingView.subcategoryVisible = !checkBox.selected;
 		}
+		
+		private function onNameChangeHandler(event:Event):void {
+			addButton.enabled = itemIT.text != "" && expandingView.selectedItem;
+		}
 
 		private function onSortButtonHandler(event:MouseEvent):void {
-			DataStorage.fillData(filterIT.text);
+			DataStorage.parseData(filterIT.text);
 			expandingView.setData(DataStorage.getCategories());
 		}
 
@@ -132,6 +135,8 @@ package {
 				qLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, OnImageLoad);
 				qLoader.load(new URLRequest(item.img));
 			}
+			removeButton.enabled = true;
+			onNameChangeHandler(null);
 		}
 		private var qLoader:Loader = new Loader();
 
@@ -148,9 +153,6 @@ package {
 			expandingView.setData(DataStorage.getCategories());
 			expandingView.addEventListener(Event.SELECT, onItemSelected);
 
-
-			//var button:Button = new Button(
-
 			var toolsPanel:Panel = new Panel(this, 280, 10);
 			toolsPanel.setSize(230, 150);
 
@@ -164,15 +166,15 @@ package {
 
 			var clearButton:Button = new Button(toolsPanel, 120, 60, "Clear Filter", onButtonHandler);
 
-			itemIT = new InputText(toolsPanel, 10, 90, "");
+			itemIT = new InputText(toolsPanel, 10, 90, "", onNameChangeHandler);
 			itemIT.setSize(100, 20);
 
-			var addButton:Button = new Button(toolsPanel, 120, 90, "Add", onButtonHandler);
+			addButton = new Button(toolsPanel, 120, 90, "Add", onButtonHandler);
 			addButton.setSize(40, 20);
-			var removeButton:Button = new Button(toolsPanel, 170, 90, "Remove", onButtonHandler);
+			addButton.enabled = false;
+			removeButton = new Button(toolsPanel, 170, 90, "Remove", onButtonHandler);
 			removeButton.setSize(50, 20);
-
-
+			removeButton.enabled = false;
 
 			var contentPanel:Panel = new Panel(this, 280, 170);
 			contentPanel.setSize(230, 240);
@@ -183,64 +185,6 @@ package {
 			textArea = new TextArea(contentPanel, 10, 110);
 			textArea.setSize(210, 120);
 			textArea.html = true;
-
-
-			const ksXoaXLogo:String = "http://www.xoax.net/public/XoaXLogoNew.png";
-
-
-
-
-
-		/*
-		var category1:CategoryView = new CategoryView(null, 0, 0, "Test Category1", new Array("Item1", "Item2", "Item3", "Item4", "Item3", "Item4"));
-		accordion.addCategory(category1, 0);
-
-		var category2:CategoryView = new CategoryView(null, 0, 0, "Test Category2", new Array("Item1", "Item2", "Item3"));
-		accordion.addCategory(category2, 1);
-
-		var category3:CategoryView = new CategoryView(null, 0, 0, "Test Category3", new Array("Item1", "Item2"));
-		accordion.addCategory(category3, 2);
-
-		var category4:CategoryView = new CategoryView(null, 0, 0, "Test Category4", new Array("Item1", "Item2", "Item3", "Item4", "Item3", "Item4"));
-		accordion.addCategory(category4, 3);
-		*/
-
-
-		/*var window:Window = new Window(null, 0, 0, "Test Window");
-		//var list:List = new List(window, 0, 0, ["Item1", "Item2", "Item3", "Item4", "Item3", "Item4"]);
-		var subCategory:Subcategory = new Subcategory(window, 0, 0);
-		subCategory.width = 200;
-		accordion.addWindow(window, 0);*/
-
-		/*accordion.addWindowAt("Kyiv", 1);
-		accordion.addWindowAt("London", 2);
-		accordion.addWindowAt("Harkiv", 3);*/
-			//accordion.addWindowAt("Lviv", 3);
-			//list.width = width;
-			//var window:Window = new Window(panel, 200, 30, "Test Window");
-			//var label:Label = new Label(window, 5, 5, "Hello World!");
-			//var list:List = new List(window, 0, 0, ["Item1", "Item2", "Item3", "Item4"]);
-
-			//window.addChild(label);
-
-
-			//var window:Window = new Window(panel, 30, 250, "Test Window");
-
-
-			//var combobox:ComboBox = new ComboBox(panel, 300, 100, "ComboBox", ["Item1", "Item2", "Item3", "Item4", "Item5", "Item1", "Item2", "Item3", "Item4", "Item5"]);
-			//combobox.autoHideScrollBar = false;
-
-		/*for(var i:int = 0; i < 2; i++)
-		{
-			var window:Window = new Window(_vbox, 0, 0, "Section " + (i + 1));
-			window.grips.visible = false;
-			window.draggable = false;
-			window.addEventListener(Event.SELECT, onWindowSelect);
-			if(i != 0) window.minimized = true;
-			_windows.push(window);
-		}*/
-
-
 		}
 	}
 

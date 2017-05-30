@@ -4,44 +4,36 @@ package ua.com.syo.uitest.model
 
 	public class DataStorage
 	{
-		public static var SORT_BY_NAME:String = "sortByName";
-		public static var SORT_BY_DATE:String = "sortByDate";
-		
 		private static var itemsDictionary:Dictionary = new Dictionary();
 		private static var categoriesDictionary:Dictionary = new Dictionary();
-		private static var sourceData:Array;
+		private static var currentSortParam:String = "";
 		
-		public static function setData(data:Array):void {
-			sourceData = data;
-			fillData("");
-		}
-		
-		public static function fillData(filterStr:String = ""):void {
+		public static function setData(sourceData:Array):void {
 			itemsDictionary = new Dictionary();
 			for (var i:int = 0; i < sourceData.length; i++) {
-				if (sourceData[i].name.toLowerCase().indexOf(filterStr.toLowerCase()) != -1) {
-					itemsDictionary[sourceData[i].name] = new Record(sourceData[i].category, sourceData[i].subcategory, sourceData[i].name, sourceData[i].text, sourceData[i].img);
-				}
+				itemsDictionary[sourceData[i].name] = new Record(sourceData[i].category, sourceData[i].subcategory, sourceData[i].name, sourceData[i].text, sourceData[i].img);
 			}
 			parseData();
 		}
 		
-		public static function parseData():void {
+		public static function parseData(filterStr:String = ""):void {
 			categoriesDictionary = new Dictionary();
 			for each (var record:Record in itemsDictionary) {
-				if (!categoriesDictionary[record.category]) {
-					categoriesDictionary[record.category] = new Category(record.category);
+				if (record.name.toLowerCase().indexOf(filterStr.toLowerCase()) != -1) {
+					if (!categoriesDictionary[record.category]) {
+						categoriesDictionary[record.category] = new Category(record.category);
+					}
+					
+					var cat:Category = categoriesDictionary[record.category];
+					var sub:SubCategory = cat.getSubcategoryByName(record.subcategory);
+					var item:Item = new Item(record.name, record.text, record.img);
+					
+					if (sub == null) {
+						sub = new SubCategory(record.subcategory);
+						cat.addSubcategory(sub);
+					}
+					sub.addItem(item);
 				}
-				
-				var cat:Category = categoriesDictionary[record.category];
-				var sub:SubCategory = cat.getSubcategoryByName(record.subcategory);
-				var item:Item = new Item(record.name, record.text, record.img);
-				
-				if (sub == null) {
-					sub = new SubCategory(record.subcategory);
-					cat.addSubcategory(sub);
-				}
-				sub.addItem(item);
 			}
 		}
 		
@@ -67,11 +59,13 @@ package ua.com.syo.uitest.model
 		}
 		
 		public static function getCategories(sortBy:String = ""):Array {
+			if (!sortBy) sortBy = currentSortParam;
 			var result:Array = [];
 			for each (var cat:Category in categoriesDictionary) {
 				result.push(cat);
 			}
 			if (sortBy)	result.sortOn(sortBy);
+			currentSortParam = sortBy;
 			return result;
 		}
 		

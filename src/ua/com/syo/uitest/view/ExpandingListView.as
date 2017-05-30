@@ -26,6 +26,7 @@ package ua.com.syo.uitest.view {
 		
 		public function setData(list:Array):void {
 			// clear
+			_selectedItem = null;
 			if (_views.length > 0) {
 				for (var i:int = 0; i < _views.length; i++) {
 					_views[i].removeEventListener(Event.CHANGE, onWindowSelect);
@@ -101,7 +102,7 @@ package ua.com.syo.uitest.view {
 		public function get selectedItem():Item {
 			return _selectedItem;
 		}
-
+		
 		public function set subcategoryVisible(value:Boolean):void {
 			this._subIsShow = value;
 			if (!value) {
