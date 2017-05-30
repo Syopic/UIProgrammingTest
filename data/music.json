@@ -3,7 +3,9 @@
 		{
 			"category":"King Crimson",
 			"subcategory":"Red",
-			"name":"Starless"
+			"name":"Starless",
+			"text":"Список уроков без категорий и подкатегорий. При выборе урока рядом со списком в текстовом поле отображается содержание урока. Содержание урока – это большой кусок текста.",
+			"img":"img/banana.jpg"
 		},
 		{
 			"category":"King Crimson",

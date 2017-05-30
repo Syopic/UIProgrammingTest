@@ -3,11 +3,13 @@ package ua.com.syo.uitest.model
 	public class Category implements ICategory
 	{
 		private var _name:String;
-		private var _subcategories:Vector.<SubCategory> = new Vector.<SubCategory>();		
+		private var _subcategories:Array = new Array();		
+		private var _date:Date;		
 		
 		public function Category(name:String)
 		{
 			this._name = name;
+			this._date = new Date();
 		}
 		
 		public function get name():String {
@@ -28,8 +30,12 @@ package ua.com.syo.uitest.model
 			return result;
 		}
 		
-		public function get subcategories():Vector.<SubCategory> {
+		public function get subcategories():Array {
 			return _subcategories;
+		}
+		
+		public function get date():Date {
+			return _date;
 		}
 		
 		

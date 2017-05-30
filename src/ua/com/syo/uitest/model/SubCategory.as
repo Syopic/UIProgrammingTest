@@ -14,7 +14,7 @@ package ua.com.syo.uitest.model
 			return _name;
 		}
 		
-		public function addItem(item:String):void {
+		public function addItem(item:Item):void {
 			_items.push(item);
 		}
 		

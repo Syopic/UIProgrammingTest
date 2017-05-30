@@ -91,7 +91,7 @@
 				var item:ListItem = _itemHolder.getChildAt(i) as ListItem;
 				item.data = _items[i];
 				if (i < _items.length) {
-					item.data = _items[i];
+					item.data = _items[i].name;
 				} else {
 					item.data = "";
 				}

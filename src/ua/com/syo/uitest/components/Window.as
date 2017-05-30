@@ -6,6 +6,8 @@ package ua.com.syo.uitest.components
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextFormat;
+	import flash.text.engine.FontWeight;
 
 	[Event(name="select", type="flash.events.Event")]
 	[Event(name="close", type="flash.events.Event")]
@@ -58,6 +60,7 @@ package ua.com.syo.uitest.components
 			_titleBar.height = 20;
 			super.addChild(_titleBar);
 			_titleLabel = new Label(_titleBar.content, 5, 2, _title);
+			//_titleLabel.setTextFormat(new TextFormat(Style.fontName, Style.fontSize, 0x666666, FontWeight.BOLD))
 			
 			_panel = new Panel(null, 0, 20);
 			_panel.visible = !_minimized;
@@ -144,7 +147,7 @@ package ua.com.syo.uitest.components
 		
 		protected function onMinimize(event:MouseEvent):void
 		{
-			minimized = !minimized;
+			//minimized = !minimized;
 		}
 		
 		protected function onClose(event:MouseEvent):void
