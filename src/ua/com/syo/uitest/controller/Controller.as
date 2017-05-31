@@ -14,14 +14,14 @@ package ua.com.syo.uitest.controller
 
 	public class Controller extends EventDispatcher
 	{
-		private var jsonData:Array = new Array("data/music.json", "data/music.json", "data/music.json");
+		private var jsonData:Array = new Array("data/music.json", "data/moto.json", "data/lessons.json");
 		
-		private var _currentStageIndex:int = 0;
+		private var _currentStageIndex:int = 1;
 		
 		public function init():void {
 			Model.instance.init();
 			Model.instance.addEventListener(Event.COMPLETE, loadDataCompleteHandler);
-			switchStage(0);
+			switchStage(_currentStageIndex);
 		}
 		
 		public function switchStage(index:int):void {

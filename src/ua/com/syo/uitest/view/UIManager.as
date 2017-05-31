@@ -14,8 +14,11 @@ package ua.com.syo.uitest.view
 	{
 		private var _parentContainer:DisplayObjectContainer;
 		private var _container:DisplayObjectContainer;
+		private var artistsPageView:ArtistsListPageView;
+		private var motoPageView:MotoShopPageView;
+		private var lessonsPageView:LessonsPageView;
 		
-		private var titles:Array = new Array("1. Artists List", "2. Moto Goods Shop", "3. Lessons list");
+		private var titles:Array = new Array("1. Artists List", "2. Moto Goods Shop", "3. Lessons List");
 		
 		
 		
@@ -36,15 +39,16 @@ package ua.com.syo.uitest.view
 			
 			switch (index) {
 				case 0:
-					var artistsPageView:ArtistsListPageView = new ArtistsListPageView();
+					if (!artistsPageView) artistsPageView = new ArtistsListPageView();
 					_container.addChild(artistsPageView);
 					break;
 				case 1:
-					var motoPageView:MotoShopPageView = new MotoShopPageView();
+					if (!motoPageView) motoPageView = new MotoShopPageView();
 					_container.addChild(motoPageView);
 					break;
-				
 				case 2:
+					if (!lessonsPageView) lessonsPageView = new LessonsPageView();
+					_container.addChild(lessonsPageView);
 					break;
 			}
 		}

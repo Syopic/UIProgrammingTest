@@ -19,6 +19,7 @@ package ua.com.syo.uitest.view {
 		protected var _vbox:VBox;
 		protected var _subIsShow:Boolean = true;
 		protected var _selectedItem:Item;
+		protected var _multiselect:Boolean = true;
 
 		public function ExpandingListView(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number = 0) {
 			super(parent, xpos, ypos);
@@ -76,8 +77,10 @@ package ua.com.syo.uitest.view {
 
 		protected function onItemSelect(event:Event):void {
 			_selectedItem = (event.currentTarget.tList as List).selectedItem as Item;
-			for (var i:int = 0; i < _views.length; i++) {
-				(_views[i] as CategoryView).clearSelection(event);
+			if (!_multiselect) {
+				for (var i:int = 0; i < _views.length; i++) {
+					(_views[i] as CategoryView).clearSelection(event);
+				}
 			}
 			dispatchEvent(new Event(Event.SELECT));
 		}
@@ -101,6 +104,10 @@ package ua.com.syo.uitest.view {
 
 		public function get selectedItem():Item {
 			return _selectedItem;
+		}
+		
+		public function set multiselect(value:Boolean):void {
+			_multiselect = value;
 		}
 		
 		public function set subcategoryVisible(value:Boolean):void {

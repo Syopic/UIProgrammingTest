@@ -19,7 +19,6 @@ package ua.com.syo.uitest.view
 	
 	public class ArtistsListPageView extends Sprite
 	{
-		
 		private var imgPanel:Panel;
 		private var expandingView:ExpandingListView;
 		private var checkBox:CheckBox;
@@ -29,8 +28,6 @@ package ua.com.syo.uitest.view
 		private var addButton:Button;
 		private var removeButton:Button;
 		
-		private var qLoader:Loader = new Loader();
-		
 		public function ArtistsListPageView()
 		{
 			expandingView = new ExpandingListView(this, 0, 0);
@@ -38,8 +35,8 @@ package ua.com.syo.uitest.view
 			expandingView.setData(DataStorage.getCategories());
 			expandingView.addEventListener(Event.SELECT, onItemSelected);
 			
-			var toolsPanel:Panel = new Panel(this, 280, 10);
-			toolsPanel.setSize(230, 150);
+			var toolsPanel:Panel = new Panel(this, 275, 0);
+			toolsPanel.setSize(230, 120);
 			
 			checkBox = new CheckBox(toolsPanel, 10, 10, "Hide Subcategories", hideSubCheckBoxHandler);
 			
@@ -60,16 +57,6 @@ package ua.com.syo.uitest.view
 			removeButton = new Button(toolsPanel, 170, 90, "Remove", onButtonHandler);
 			removeButton.setSize(50, 20);
 			removeButton.enabled = false;
-			
-			var contentPanel:Panel = new Panel(this, 280, 170);
-			contentPanel.setSize(230, 240);
-			
-			imgPanel = new Panel(contentPanel, 10, 10);
-			imgPanel.setSize(100, 85);
-			
-			textArea = new TextArea(contentPanel, 10, 110);
-			textArea.setSize(210, 120);
-			textArea.html = true;
 		}
 		
 		private function hideSubCheckBoxHandler(event:MouseEvent):void {
@@ -111,6 +98,8 @@ package ua.com.syo.uitest.view
 						DataStorage.removeItem(new Record(record.category, record.subcategory, record.name));
 						expandingView.setData(DataStorage.getCategories());
 						removeButton.enabled = false;
+						filterIT.text = "";
+						onFilterChangeHandler(null);
 					}
 					break;
 			}
@@ -133,25 +122,8 @@ package ua.com.syo.uitest.view
 		}
 		
 		private function onItemSelected(event:Event):void {
-			var item:Item = expandingView.selectedItem;
-			textArea.text = item.text;
-			
-			var record:Record = DataStorage.getItemByName(item.name);
-			
-			
-			if (item.img) {
-				qLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, OnImageLoad);
-				qLoader.load(new URLRequest(item.img));
-			}
 			removeButton.enabled = true;
 			onNameChangeHandler(null);
-		}
-		
-		
-		private function OnImageLoad(e:Event):void {
-			var qTempBitmap:Bitmap = qLoader.content as Bitmap;
-			var qBitmap:Bitmap = new Bitmap(qTempBitmap.bitmapData);
-			imgPanel.addChild(qBitmap);
 		}
 	}
 }

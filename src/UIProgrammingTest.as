@@ -6,7 +6,7 @@ package {
 	import ua.com.syo.uitest.controller.Controller;
 	import ua.com.syo.uitest.view.UIManager;
 
-	[SWF(frameRate = "60", width = "600", height = "500", backgroundColor = "0xeeeeee")]
+	[SWF(frameRate = "60", width = "540", height = "460", backgroundColor = "0xeeeeee")]
 	public class UIProgrammingTest extends Sprite {
 
 		public function UIProgrammingTest() {
@@ -22,7 +22,6 @@ package {
 			
 			UIManager.instance.init(this);
 			Controller.instance.init();
-			
 		}
 	}
 
