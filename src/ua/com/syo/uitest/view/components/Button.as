@@ -16,15 +16,7 @@ package ua.com.syo.uitest.view.components
 		protected var _down:Boolean = false;
 		protected var _selected:Boolean = false;
 		protected var _toggle:Boolean = false;
-		
-		/**
-		 * Constructor
-		 * @param parent The parent DisplayObjectContainer on which to add this PushButton.
-		 * @param xpos The x position to place this component.
-		 * @param ypos The y position to place this component.
-		 * @param label The string to use for the initial label of this component.
-		 * @param defaultHandler The event handling function to handle the default event for this component (click in this case).
-		 */
+
 		public function Button(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, label:String = "", defaultHandler:Function = null)
 		{
 			super(parent, xpos, ypos);
@@ -34,10 +26,7 @@ package ua.com.syo.uitest.view.components
 			}
 			this.label = label;
 		}
-		
-		/**
-		 * Initializes the component.
-		 */
+
 		override protected function init():void
 		{
 			super.init();
@@ -46,9 +35,6 @@ package ua.com.syo.uitest.view.components
 			setSize(100, 20);
 		}
 		
-		/**
-		 * Creates and adds the child display objects of this component.
-		 */
 		override protected function addChildren():void
 		{
 			_back = new Sprite();
@@ -68,9 +54,6 @@ package ua.com.syo.uitest.view.components
 			addEventListener(MouseEvent.ROLL_OVER, onMouseOver);
 		}
 		
-		/**
-		 * Draws the face of the button, color based on state.
-		 */
 		protected function drawFace():void
 		{
 			_face.graphics.clear();
@@ -85,15 +68,7 @@ package ua.com.syo.uitest.view.components
 			_face.graphics.drawRect(0, 0, _width - 2, _height - 2);
 			_face.graphics.endFill();
 		}
-		
-		
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-		
-		/**
-		 * Draws the visual ui of the component.
-		 */
+	
 		override public function draw():void
 		{
 			super.draw();
@@ -121,27 +96,12 @@ package ua.com.syo.uitest.view.components
 			
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// event handlers
-		///////////////////////////////////
-		
-		/**
-		 * Internal mouseOver handler.
-		 * @param event The MouseEvent passed by the system.
-		 */
 		protected function onMouseOver(event:MouseEvent):void
 		{
 			_over = true;
 			addEventListener(MouseEvent.ROLL_OUT, onMouseOut);
 		}
 		
-		/**
-		 * Internal mouseOut handler.
-		 * @param event The MouseEvent passed by the system.
-		 */
 		protected function onMouseOut(event:MouseEvent):void
 		{
 			_over = false;
@@ -152,10 +112,6 @@ package ua.com.syo.uitest.view.components
 			removeEventListener(MouseEvent.ROLL_OUT, onMouseOut);
 		}
 		
-		/**
-		 * Internal mouseOut handler.
-		 * @param event The MouseEvent passed by the system.
-		 */
 		protected function onMouseGoDown(event:MouseEvent):void
 		{
 			_down = true;
@@ -164,10 +120,6 @@ package ua.com.syo.uitest.view.components
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
 		}
 		
-		/**
-		 * Internal mouseUp handler.
-		 * @param event The MouseEvent passed by the system.
-		 */
 		protected function onMouseGoUp(event:MouseEvent):void
 		{
 			if(_toggle  && _over)
@@ -180,16 +132,6 @@ package ua.com.syo.uitest.view.components
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-		
-		/**
-		 * Sets / gets the label text shown on this Pushbutton.
-		 */
 		public function set label(str:String):void
 		{
 			_labelText = str;

@@ -20,8 +20,6 @@ package ua.com.syo.uitest.view
 		
 		private var titles:Array = new Array("1. Artists List", "2. Moto Goods Shop", "3. Lessons List");
 		
-		
-		
 		private var prewButton:Button;
 		private var nextButton:Button;
 		private var titleLabel:Label;

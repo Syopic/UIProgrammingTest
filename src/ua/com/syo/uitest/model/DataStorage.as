@@ -1,13 +1,16 @@
 package ua.com.syo.uitest.model
 {
 	import flash.utils.Dictionary;
-
+	/**
+	 * simple data class with helpers
+	 */
 	public class DataStorage
 	{
 		private static var itemsDictionary:Dictionary = new Dictionary();
 		private static var categoriesDictionary:Dictionary = new Dictionary();
 		private static var currentSortParam:String = "";
 		
+		// flat data from json
 		public static function setData(sourceData:Array):void {
 			itemsDictionary = new Dictionary();
 			for (var i:int = 0; i < sourceData.length; i++) {
@@ -16,6 +19,7 @@ package ua.com.syo.uitest.model
 			parseData();
 		}
 		
+		// parse in structure
 		public static function parseData(filterStr:String = ""):void {
 			categoriesDictionary = new Dictionary();
 			for each (var record:Record in itemsDictionary) {
@@ -71,10 +75,6 @@ package ua.com.syo.uitest.model
 		
 		public static function getItemByName(name:String):Record {
 			return itemsDictionary[name];
-		}
-		
-		public static function getCategoryByName(name:String):Category {
-			return categoriesDictionary[name];
 		}
 	}
 }

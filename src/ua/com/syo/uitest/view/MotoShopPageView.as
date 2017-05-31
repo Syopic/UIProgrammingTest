@@ -7,6 +7,7 @@ package ua.com.syo.uitest.view
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
+	import flash.utils.Dictionary;
 	
 	import ua.com.syo.uitest.model.DataStorage;
 	import ua.com.syo.uitest.model.Item;
@@ -22,6 +23,9 @@ package ua.com.syo.uitest.view
 		
 		private var expandingView:ExpandingListView;
 		private var contentPanel:Panel;
+		private var listContainer:Sprite;
+		
+		private var itemsDictionary:Dictionary = new Dictionary(true);
 		
 		public function MotoShopPageView()
 		{
@@ -33,6 +37,8 @@ package ua.com.syo.uitest.view
 			
 			contentPanel = new Panel(this, 260, 0);
 			contentPanel.setSize(260, 400);
+			listContainer = new Sprite();
+			contentPanel.addRawChild(listContainer);
 		}
 		
 		
@@ -41,10 +47,22 @@ package ua.com.syo.uitest.view
 			var item:Item = expandingView.selectedItem;
 			
 			var record:Record = DataStorage.getItemByName(item.name);
+			itemsDictionary[record.subcategory] = item;
+			refreshList();
+		}
+		
+		private function refreshList():void {
+			while (listContainer.numChildren > 0) {
+				listContainer.removeChildAt(0);
+			}
+			var dy:int = 0;
+			for each (var i:Item in itemsDictionary) 
+			{
+				var shopItem:ShopItemView = new ShopItemView(i);
+				listContainer.addChild(shopItem).y = dy;
+				dy += 70;
+			}
 			
-			var shopItem:ShopItemView = new ShopItemView(item);
-			//contentPanel.removeChildAt(0);
-			contentPanel.addChild(shopItem);
 		}
 		
 	}

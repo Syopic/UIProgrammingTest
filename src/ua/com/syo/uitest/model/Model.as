@@ -22,7 +22,6 @@ package ua.com.syo.uitest.model
 			loader.load(request);
 		}
 		
-		
 		private function onLoaderComplete(e:Event):void {
 			DataStorage.setData(com.adobe.serialization.json.JSON.decode(URLLoader(e.target).data).list);
 			dispatchEvent(new Event(Event.COMPLETE));

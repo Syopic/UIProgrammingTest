@@ -12,37 +12,19 @@ package ua.com.syo.uitest.view.components
 		protected var _color:int = -1;
 		protected var _shadow:Boolean = true;
 		
-		
-		/**
-		 * Container for content added to this panel. This is masked, so best to add children to content, rather than directly to the panel.
-		 */
 		public var content:Sprite;
-		
-		
-		/**
-		 * Constructor
-		 * @param parent The parent DisplayObjectContainer on which to add this Panel.
-		 * @param xpos The x position to place this component.
-		 * @param ypos The y position to place this component.
-		 */
+
 		public function Panel(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0)
 		{
 			super(parent, xpos, ypos);
 		}
 		
-		
-		/**
-		 * Initializes the component.
-		 */
 		override protected function init():void
 		{
 			super.init();
 			setSize(100, 100);
 		}
-		
-		/**
-		 * Creates and adds the child display objects of this component.
-		 */
+
 		override protected function addChildren():void
 		{
 			_background = new Sprite();
@@ -59,34 +41,19 @@ package ua.com.syo.uitest.view.components
 			filters = [getShadow(2, true)];
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-		
-		/**
-		 * Overridden to add new child to content.
-		 */
 		public override function addChild(child:DisplayObject):DisplayObject
 		{
 			content.addChild(child);
 			return child;
 		}
 		
-		/**
-		 * Access to super.addChild
-		 */
+
 		public function addRawChild(child:DisplayObject):DisplayObject
 		{
 			super.addChild(child);
 			return child;
 		}
-		
-		/**
-		 * Draws the visual ui of the component.
-		 */
+
 		override public function draw():void
 		{
 			super.draw();
@@ -110,24 +77,11 @@ package ua.com.syo.uitest.view.components
 			_mask.graphics.endFill();
 		}
 		
-		
-		///////////////////////////////////
-		// event handlers
-		///////////////////////////////////
-		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-		
-		
 		public function get shadow():Boolean
 		{
 			return _shadow;
 		}
 		
-		/**
-		 * Gets / sets the backgrond color of this panel.
-		 */
 		public function set color(c:int):void
 		{
 			_color = c;

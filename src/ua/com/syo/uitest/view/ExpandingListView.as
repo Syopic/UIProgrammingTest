@@ -19,7 +19,7 @@ package ua.com.syo.uitest.view {
 		protected var _vbox:VBox;
 		protected var _subIsShow:Boolean = true;
 		protected var _selectedItem:Item;
-		protected var _multiselect:Boolean = true;
+		protected var _multiselect:Boolean = false;
 
 		public function ExpandingListView(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number = 0) {
 			super(parent, xpos, ypos);
@@ -55,6 +55,8 @@ package ua.com.syo.uitest.view {
 			categoryView.addEventListener(Event.CHANGE, onWindowSelect);
 			categoryView.addEventListener(Event.SELECT, onItemSelect);
 			
+			categoryView.minimized ? categoryView.title = "+ " + categoryView.categoryModel.name : categoryView.title = " - " + categoryView.categoryModel.name;
+			
 			_views.push(categoryView);
 		}
 
@@ -70,8 +72,11 @@ package ua.com.syo.uitest.view {
 		}
 
 		protected function onWindowSelect(event:Event):void {
-			var view:Window = event.target as Window;
-			if (_subIsShow) view.minimized = !view.minimized;
+			var view:CategoryView = event.target as CategoryView;
+			if (_subIsShow) {
+				view.minimized = !view.minimized;
+				view.minimized ? view.title = "+ " + view.categoryModel.name : view.title = " - " + view.categoryModel.name;
+			}
 			draw();
 		}
 

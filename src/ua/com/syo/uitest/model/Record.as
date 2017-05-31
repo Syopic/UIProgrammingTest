@@ -7,7 +7,6 @@ package ua.com.syo.uitest.model
 		public var name:String;
 		public var text:String;
 		public var img:String;
-
 		
 		public function Record(category:String, subcategory:String, name:String, text:String = "", img:String = "")
 		{

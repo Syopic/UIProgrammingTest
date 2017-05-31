@@ -77,9 +77,6 @@ package ua.com.syo.uitest.view.components
 			return _text;
 		}
 		
-		/**
-		 * Gets / sets whether or not this Label will autosize.
-		 */
 		public function set autoSize(b:Boolean):void
 		{
 			_autoSize = b;
@@ -89,9 +86,6 @@ package ua.com.syo.uitest.view.components
 			return _autoSize;
 		}
 		
-		/**
-		 * Gets the internal TextField of the label if you need to do further customization of it.
-		 */
 		public function get textField():TextField
 		{
 			return _tf;

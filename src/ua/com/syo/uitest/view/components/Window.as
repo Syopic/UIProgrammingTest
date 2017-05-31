@@ -1,4 +1,3 @@
- 
 package ua.com.syo.uitest.view.components
 {
 	import flash.display.DisplayObject;
@@ -25,31 +24,17 @@ package ua.com.syo.uitest.view.components
 		protected var _minimized:Boolean = false;
 		protected var _hasCloseButton:Boolean;
 		
-		
-		/**
-		 * Constructor
-		 * @param parent The parent DisplayObjectContainer on which to add this Panel.
-		 * @param xpos The x position to place this component.
-		 * @param ypos The y position to place this component.
-		 * @param title The string to display in the title bar.
-		 */
 		public function Window(parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0, title:String="Window")
 		{
 			_title = title;
 			super(parent, xpos, ypos);
 		}
 		
-		/**
-		 * Initializes the component.
-		 */
 		override protected function init():void
 		{
 			super.init();
 		}
 		
-		/**
-		 * Creates and adds the child display objects of this component.
-		 */
 		override protected function addChildren():void
 		{
 			_titleBar = new Panel();
@@ -59,8 +44,7 @@ package ua.com.syo.uitest.view.components
 			_titleBar.addEventListener(MouseEvent.MOUSE_DOWN, onMouseGoDown);
 			_titleBar.height = 20;
 			super.addChild(_titleBar);
-			_titleLabel = new Label(_titleBar.content, 5, 2, _title);
-			//_titleLabel.setTextFormat(new TextFormat(Style.fontName, Style.fontSize, 0x666666, FontWeight.BOLD))
+			_titleLabel = new Label(_titleBar.content, 0, 2, _title);
 			
 			_panel = new Panel(null, 0, 20);
 			_panel.visible = !_minimized;
@@ -85,31 +69,18 @@ package ua.com.syo.uitest.view.components
 			filters = [getShadow(4, false)];
 		}
 		
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-		
-		/**
-		 * Overridden to add new child to content.
-		 */
 		public override function addChild(child:DisplayObject):DisplayObject
 		{
 			content.addChild(child);
 			return child;
 		}
 		
-		/**
-		 * Access to super.addChild
-		 */
 		public function addRawChild(child:DisplayObject):DisplayObject
 		{
 			super.addChild(child);
 			return child;
 		}
 		
-		/**
-		 * Draws the visual ui of the component.
-		 */
 		override public function draw():void
 		{
 			super.draw();
@@ -122,24 +93,11 @@ package ua.com.syo.uitest.view.components
 			_panel.draw();
 		}
 
-
-		///////////////////////////////////
-		// event handlers
-		///////////////////////////////////
-		
-		/**
-		 * Internal mouseDown handler. Starts a drag.
-		 * @param event The MouseEvent passed by the system.
-		 */
 		protected function onMouseGoDown(event:MouseEvent):void
 		{
 			dispatchEvent(new Event(Event.CHANGE));
 		}
 		
-		/**
-		 * Internal mouseUp handler. Stops the drag.
-		 * @param event The MouseEvent passed by the system.
-		 */
 		protected function onMouseGoUp(event:MouseEvent):void
 		{
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
@@ -154,14 +112,7 @@ package ua.com.syo.uitest.view.components
 		{
 			dispatchEvent(new Event(Event.CLOSE));
 		}
-		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-		
-		/**
-		 * Gets / sets whether or not this Window will have a drop shadow.
-		 */
+
 		public function set shadow(b:Boolean):void
 		{
 			_shadow = b;
@@ -179,9 +130,6 @@ package ua.com.syo.uitest.view.components
 			return _shadow;
 		}
 		
-		/**
-		 * Gets / sets the background color of this panel.
-		 */
 		public function set color(c:int):void
 		{
 			_color = c;
@@ -192,9 +140,6 @@ package ua.com.syo.uitest.view.components
 			return _color;
 		}
 		
-		/**
-		 * Gets / sets the title shown in the title bar.
-		 */
 		public function set title(t:String):void
 		{
 			_title = t;
@@ -205,17 +150,11 @@ package ua.com.syo.uitest.view.components
 			return _title;
 		}
 		
-		/**
-		 * Container for content added to this panel. This is just a reference to the content of the internal Panel, which is masked, so best to add children to content, rather than directly to the window.
-		 */
 		public function get content():DisplayObjectContainer
 		{
 			return _panel.content;
 		}
 		
-		/**
-		 * Gets / sets whether or not the window will show a minimize button that will toggle the window open and closed. A closed window will only show the title bar.
-		 */
 		public function set hasMinimizeButton(b:Boolean):void
 		{
 			_hasMinimizeButton = b;
@@ -234,9 +173,6 @@ package ua.com.syo.uitest.view.components
 			return _hasMinimizeButton;
 		}
 		
-		/**
-		 * Gets / sets whether the window is closed. A closed window will only show its title bar.
-		 */
 		public function set minimized(value:Boolean):void
 		{
 			_minimized = value;
@@ -258,9 +194,6 @@ package ua.com.syo.uitest.view.components
 			return _minimized;
 		}
 		
-		/**
-		 * Gets the height of the component. A minimized window's height will only be that of its title bar.
-		 */
 		override public function get height():Number
 		{
 			if(contains(_panel))
@@ -273,9 +206,6 @@ package ua.com.syo.uitest.view.components
 			}
 		}
 
-		/**
-		 * Returns a reference to the title bar for customization.
-		 */
 		public function get titleBar():Panel
 		{
 			return _titleBar;

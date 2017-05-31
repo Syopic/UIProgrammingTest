@@ -26,14 +26,6 @@ package ua.com.syo.uitest.view.components
 		protected var _direction:String;
 		protected var _shouldRepeat:Boolean = false;
 		
-		/**
-		 * Constructor
-		 * @param orientation Whether this is a vertical or horizontal slider.
-		 * @param parent The parent DisplayObjectContainer on which to add this Slider.
-		 * @param xpos The x position to place this component.
-		 * @param ypos The y position to place this component.
-		 * @param defaultHandler The event handling function to handle the default event for this component (change in this case).
-		 */
 		public function ScrollBar(orientation:String, parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0, defaultHandler:Function = null)
 		{
 			_orientation = orientation;
@@ -44,9 +36,6 @@ package ua.com.syo.uitest.view.components
 			}
 		}
 		
-		/**
-		 * Creates and adds the child display objects of this component.
-		 */
 		override protected function addChildren():void
 		{
 			_scrollSlider = new ScrollSlider(_orientation, this, 0, 10, onChange);
@@ -90,13 +79,9 @@ package ua.com.syo.uitest.view.components
 				downArrow.graphics.lineTo(4, 3);
 				downArrow.graphics.endFill();
 			}
-
 			
 		}
 		
-		/**
-		 * Initializes the component.
-		 */
 		protected override function init():void
 		{
 			super.init();
@@ -114,34 +99,16 @@ package ua.com.syo.uitest.view.components
 			_repeatTimer.addEventListener(TimerEvent.TIMER, onRepeat);
 		}
 		
-		
-		
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-		
-		/**
-		 * Convenience method to set the three main parameters in one shot.
-		 * @param min The minimum value of the slider.
-		 * @param max The maximum value of the slider.
-		 * @param value The value of the slider.
-		 */
 		public function setSliderParams(min:Number, max:Number, value:Number):void
 		{
 			_scrollSlider.setSliderParams(min, max, value);
 		}
 		
-		/**
-		 * Sets the percentage of the size of the thumb button.
-		 */
 		public function setThumbPercent(value:Number):void
 		{
 			_scrollSlider.setThumbPercent(value);
 		}
 		
-		/**
-		 * Draws the visual ui of the component.
-		 */
 		override public function draw():void
 		{
 			super.draw();
@@ -174,18 +141,7 @@ package ua.com.syo.uitest.view.components
             }
 		}
 
-		
-		
-		
-		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-
-        /**
-         * Sets / gets whether the scrollbar will auto hide when there is nothing to scroll.
-         */
-        public function set autoHide(value:Boolean):void
+		public function set autoHide(value:Boolean):void
         {
             _autoHide = value;
             invalidate();
@@ -195,9 +151,6 @@ package ua.com.syo.uitest.view.components
             return _autoHide;
         }
 
-		/**
-		 * Sets / gets the current value of this scroll bar.
-		 */
 		public function set value(v:Number):void
 		{
 			_scrollSlider.value = v;
@@ -207,9 +160,6 @@ package ua.com.syo.uitest.view.components
 			return _scrollSlider.value;
 		}
 		
-		/**
-		 * Sets / gets the minimum value of this scroll bar.
-		 */
 		public function set minimum(v:Number):void
 		{
 			_scrollSlider.minimum = v;
@@ -219,9 +169,6 @@ package ua.com.syo.uitest.view.components
 			return _scrollSlider.minimum;
 		}
 		
-		/**
-		 * Sets / gets the maximum value of this scroll bar.
-		 */
 		public function set maximum(v:Number):void
 		{
 			_scrollSlider.maximum = v;
@@ -231,9 +178,6 @@ package ua.com.syo.uitest.view.components
 			return _scrollSlider.maximum;
 		}
 		
-		/**
-		 * Sets / gets the amount the value will change when up or down buttons are pressed.
-		 */
 		public function set lineSize(value:int):void
 		{
 			_lineSize = value;
@@ -243,9 +187,6 @@ package ua.com.syo.uitest.view.components
 			return _lineSize;
 		}
 		
-		/**
-		 * Sets / gets the amount the value will change when the back is clicked.
-		 */
 		public function set pageSize(value:int):void
 		{
 			_scrollSlider.pageSize = value;
@@ -255,16 +196,7 @@ package ua.com.syo.uitest.view.components
 		{
 			return _scrollSlider.pageSize;
 		}
-		
 
-		
-		
-		
-		
-		///////////////////////////////////
-		// event handlers
-		///////////////////////////////////
-		
 		protected function onUpClick(event:MouseEvent):void
 		{
 			goUp();

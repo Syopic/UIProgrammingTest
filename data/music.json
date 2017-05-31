@@ -82,6 +82,26 @@
 			"category":"David Byrne & St. Vincent",
 			"subcategory":"Love This Giant",
 			"name":"I Am An Ape"
+		},
+		{
+			"category":"David Bowie",
+			"subcategory":"Space Oddity",
+			"name":"Don't Sit Down"
+		},
+		{
+			"category":"David Bowie",
+			"subcategory":"Space Oddity",
+			"name":"Letter to Hermione"
+		},
+		{
+			"category":"Brian Eno",
+			"subcategory":"I Dormienti",
+			"name":"Reflection"
+		},
+		{
+			"category":"Brian Eno",
+			"subcategory":"Music for Prague",
+			"name":"Textures"
 		}
 	]
 }

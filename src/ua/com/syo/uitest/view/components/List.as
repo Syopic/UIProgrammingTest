@@ -18,13 +18,6 @@
 		protected var _rolloverColor:uint = Style.LIST_ROLLOVER;
 		protected var _alternateRows:Boolean = false;
 
-		/**
-		 * Constructor
-		 * @param parent The parent DisplayObjectContainer on which to add this List.
-		 * @param xpos The x position to place this component.
-		 * @param ypos The y position to place this component.
-		 * @param items An array of items to display in the list. Either strings or objects with label property.
-		 */
 		public function List(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number = 0, items:Array = null) {
 			if (items != null) {
 				_items = items;
@@ -34,9 +27,6 @@
 			super(parent, xpos, ypos);
 		}
 
-		/**
-		 * Initilizes the component.
-		 */
 		protected override function init():void {
 			super.init();
 			//setSize(100, 100);
@@ -47,9 +37,6 @@
 
 		}
 
-		/**
-		 * Creates and adds the child display objects of this component.
-		 */
 		protected override function addChildren():void {
 			super.addChildren();
 			_panel = new Panel(this, 0, 0);
@@ -57,9 +44,6 @@
 			_panel.content.addChild(_itemHolder);
 		}
 
-		/**
-		 * Creates all the list items based on data.
-		 */
 		protected function makeListItems():void {
 			var item:ListItem;
 			while (_itemHolder.numChildren > 0) {
@@ -82,7 +66,6 @@
 				item.addEventListener(MouseEvent.CLICK, onSelect);
 			}
 		}
-
 
 		protected function fillItems():void {
 			var numItems:int = Math.ceil(_height / _listItemHeight);
@@ -108,19 +91,6 @@
 			}
 		}
 
-		/**
-		 * If the selected item is not in view, scrolls the list to make the selected item appear in the view.
-		 */
-
-
-
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-
-		/**
-		 * Draws the visual ui of the component.
-		 */
 		public override function draw():void {
 			super.draw();
 			_selectedIndex = Math.min(_selectedIndex, _items.length - 1);
@@ -131,10 +101,6 @@
 
 		}
 
-		/**
-		 * Adds an item to the list.
-		 * @param item The item to add. Can be a string or an object containing a string property named label.
-		 */
 		public function addItem(item:Object):void {
 			_items.push(item);
 			invalidate();
@@ -142,11 +108,6 @@
 			fillItems();
 		}
 
-		/**
-		 * Adds an item to the list at the specified index.
-		 * @param item The item to add. Can be a string or an object containing a string property named label.
-		 * @param index The index at which to add the item.
-		 */
 		public function addItemAt(item:Object, index:int):void {
 			index = Math.max(0, index);
 			index = Math.min(_items.length, index);
@@ -156,19 +117,11 @@
 			fillItems();
 		}
 
-		/**
-		 * Removes the referenced item from the list.
-		 * @param item The item to remove. If a string, must match the item containing that string. If an object, must be a reference to the exact same object.
-		 */
 		public function removeItem(item:Object):void {
 			var index:int = _items.indexOf(item);
 			removeItemAt(index);
 		}
 
-		/**
-		 * Removes the item from the list at the specified index
-		 * @param index The index of the item to remove.
-		 */
 		public function removeItemAt(index:int):void {
 			if (index < 0 || index >= _items.length) {
 				return;
@@ -179,9 +132,6 @@
 			fillItems();
 		}
 
-		/**
-		 * Removes all items from the list.
-		 */
 		public function removeAll():void {
 			_items.length = 0;
 			invalidate();
@@ -189,17 +139,6 @@
 			fillItems();
 		}
 
-
-
-
-
-		///////////////////////////////////
-		// event handlers
-		///////////////////////////////////
-
-		/**
-		 * Called when a user selects an item in the list.
-		 */
 		protected function onSelect(event:Event):void {
 			if (!(event.target is ListItem)) {
 				return;
@@ -222,16 +161,10 @@
 			}
 		}
 
-		/**
-		 * Called when the user scrolls the scroll bar.
-		 */
 		protected function onScroll(event:Event):void {
 			fillItems();
 		}
 
-		/**
-		 * Called when the mouse wheel is scrolled over the component.
-		 */
 		protected function onMouseWheel(event:MouseEvent):void {
 			fillItems();
 		}
@@ -241,13 +174,6 @@
 			fillItems();
 		}
 
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-
-		/**
-		 * Sets / gets the index of the selected list item.
-		 */
 		public function set selectedIndex(value:int):void {
 			if (value >= 0 && value < _items.length) {
 				_selectedIndex = value;
@@ -263,9 +189,6 @@
 			return _selectedIndex;
 		}
 
-		/**
-		 * Sets / gets the item in the list, if it exists.
-		 */
 		public function set selectedItem(item:Object):void {
 			var index:int = _items.indexOf(item);
 			//			if(index != -1)
@@ -283,9 +206,6 @@
 			return null;
 		}
 
-		/**
-		 * Sets/gets the default background color of list items.
-		 */
 		public function set defaultColor(value:uint):void {
 			_defaultColor = value;
 			invalidate();
@@ -295,9 +215,6 @@
 			return _defaultColor;
 		}
 
-		/**
-		 * Sets/gets the selected background color of list items.
-		 */
 		public function set selectedColor(value:uint):void {
 			_selectedColor = value;
 			invalidate();
@@ -307,9 +224,6 @@
 			return _selectedColor;
 		}
 
-		/**
-		 * Sets/gets the rollover background color of list items.
-		 */
 		public function set rolloverColor(value:uint):void {
 			_rolloverColor = value;
 			invalidate();
@@ -319,9 +233,6 @@
 			return _rolloverColor;
 		}
 
-		/**
-		 * Sets the height of each list item.
-		 */
 		public function set listItemHeight(value:Number):void {
 			_listItemHeight = value;
 			makeListItems();
@@ -332,9 +243,6 @@
 			return _listItemHeight;
 		}
 
-		/**
-		 * Sets / gets the list of items to be shown.
-		 */
 		public function set items(value:Array):void {
 			_items = value;
 			invalidate();
@@ -344,9 +252,6 @@
 			return _items;
 		}
 
-		/**
-		 * Sets / gets the class used to render list items. Must extend ListItem.
-		 */
 		public function set listItemClass(value:Class):void {
 			_listItemClass = value;
 			makeListItems();
@@ -357,9 +262,6 @@
 			return _listItemClass;
 		}
 
-		/**
-		 * Sets / gets the color for alternate rows if alternateRows is set to true.
-		 */
 		public function set alternateColor(value:uint):void {
 			_alternateColor = value;
 			invalidate();
@@ -369,9 +271,6 @@
 			return _alternateColor;
 		}
 
-		/**
-		 * Sets / gets whether or not every other row will be colored with the alternate color.
-		 */
 		public function set alternateRows(value:Boolean):void {
 			_alternateRows = value;
 			invalidate();

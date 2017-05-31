@@ -12,15 +12,6 @@ package ua.com.syo.uitest.view.components
 		protected var _labelText:String = "";
 		protected var _selected:Boolean = false;
 		
-		
-		/**
-		 * Constructor
-		 * @param parent The parent DisplayObjectContainer on which to add this CheckBox.
-		 * @param xpos The x position to place this component.
-		 * @param ypos The y position to place this component.
-		 * @param label String containing the label for this component.
-		 * @param defaultHandler The event handling function to handle the default event for this component (click in this case).
-		 */
 		public function CheckBox(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, label:String = "", defaultHandler:Function = null)
 		{
 			_labelText = label;
@@ -30,10 +21,7 @@ package ua.com.syo.uitest.view.components
 				addEventListener(MouseEvent.CLICK, defaultHandler);
 			}
 		}
-		
-		/**
-		 * Initializes the component.
-		 */
+ 
 		override protected function init():void
 		{
 			super.init();
@@ -41,10 +29,7 @@ package ua.com.syo.uitest.view.components
 			useHandCursor = true;
 			mouseChildren = false;
 		}
-		
-		/**
-		 * Creates the children for this component
-		 */
+
 		override protected function addChildren():void
 		{
 			_back = new Sprite();
@@ -62,16 +47,6 @@ package ua.com.syo.uitest.view.components
 			addEventListener(MouseEvent.CLICK, onClick);
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-		
-		/**
-		 * Draws the visual ui of the component.
-		 */
 		override public function draw():void
 		{
 			super.draw();
@@ -92,33 +67,12 @@ package ua.com.syo.uitest.view.components
 			_height = 10;
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// event handler
-		///////////////////////////////////
-		
-		/**
-		 * Internal click handler.
-		 * @param event The MouseEvent passed by the system.
-		 */
 		protected function onClick(event:MouseEvent):void
 		{
 			_selected = !_selected;
 			_button.visible = _selected;
 		}
-		
-		
-		
-		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-		
-		/**
-		 * Sets / gets the label text shown on this CheckBox.
-		 */
+	
 		public function set label(str:String):void
 		{
 			_labelText = str;
@@ -128,10 +82,7 @@ package ua.com.syo.uitest.view.components
 		{
 			return _labelText;
 		}
-		
-		/**
-		 * Sets / gets the selected state of this CheckBox.
-		 */
+	
 		public function set selected(s:Boolean):void
 		{
 			_selected = s;
@@ -142,9 +93,6 @@ package ua.com.syo.uitest.view.components
 			return _selected;
 		}
 		
-		/**
-		 * Sets/gets whether this component will be enabled or not.
-		 */
 		public override function set enabled(value:Boolean):void
 		{
 			super.enabled = value;

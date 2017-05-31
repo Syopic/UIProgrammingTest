@@ -16,9 +16,6 @@ package ua.com.syo.uitest.view.components
 			super(parent, xpos, ypos);
 		}
 		
-		/**
-		 * Override of addChild to force layout;
-		 */
 		override public function addChild(child:DisplayObject) : DisplayObject
 		{
 			super.addChild(child);
@@ -27,9 +24,6 @@ package ua.com.syo.uitest.view.components
 			return child;
 		}
 
-		/**
-		 * Override of addChildAt to force layout;
-		 */
 		override public function addChildAt(child:DisplayObject, index:int) : DisplayObject
 		{
 			super.addChildAt(child, index);
@@ -38,10 +32,7 @@ package ua.com.syo.uitest.view.components
 			return child;
 		}
 
-        /**
-         * Override of removeChild to force layout;
-         */
-        override public function removeChild(child:DisplayObject):DisplayObject
+		override public function removeChild(child:DisplayObject):DisplayObject
         {
             super.removeChild(child);            
             child.removeEventListener(Event.RESIZE, onResize);
@@ -49,9 +40,6 @@ package ua.com.syo.uitest.view.components
             return child;
         }
 		
-        /**
-         * Override of removeChild to force layout;
-         */
         override public function removeChildAt(index:int):DisplayObject
         {
             var child:DisplayObject = super.removeChildAt(index);
@@ -60,17 +48,11 @@ package ua.com.syo.uitest.view.components
             return child;
         }
 
-		/**
-		 * Internal handler for resize event of any attached component. Will redo the layout based on new size.
-		 */
 		protected function onResize(event:Event):void
 		{
 			invalidate();
 		}
 		
-		/**
-		 * Draws the visual ui of the component, in this case, laying out the sub components.
-		 */
 		override public function draw() : void
 		{
 			_width = 0;

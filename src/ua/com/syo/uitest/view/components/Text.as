@@ -19,13 +19,6 @@ package ua.com.syo.uitest.view.components
 		protected var _html:Boolean = false;
 		protected var _format:TextFormat;
 		
-		/**
-		 * Constructor
-		 * @param parent The parent DisplayObjectContainer on which to add this Label.
-		 * @param xpos The x position to place this component.
-		 * @param ypos The y position to place this component.
-		 * @param text The initial text to display in this component.
-		 */
 		public function Text(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, text:String = "")
 		{
 			this.text = text;
@@ -33,17 +26,11 @@ package ua.com.syo.uitest.view.components
 			setSize(200, 100);
 		}
 		
-		/**
-		 * Initializes the component.
-		 */
 		override protected function init():void
 		{
 			super.init();
 		}
 		
-		/**
-		 * Creates and adds the child display objects of this component.
-		 */
 		override protected function addChildren():void
 		{
 			_panel = new Panel(this);
@@ -64,17 +51,7 @@ package ua.com.syo.uitest.view.components
 			_tf.addEventListener(Event.CHANGE, onChange);			
 			addChild(_tf);
 		}
-		
-		
-		
-		
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-		
-		/**
-		 * Draws the visual ui of the component.
-		 */
+
 		override public function draw():void
 		{
 			super.draw();
@@ -107,29 +84,12 @@ package ua.com.syo.uitest.view.components
 			_tf.setTextFormat(_format);
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// event handlers
-		///////////////////////////////////
-		
-		/**
-		 * Called when the text in the text field is manually changed.
-		 */
 		protected function onChange(event:Event):void
 		{
 			_text = _tf.text;
 			dispatchEvent(event);
 		}
 		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-		
-		/**
-		 * Gets / sets the text of this Label.
-		 */
 		public function set text(t:String):void
 		{
 			_text = t;
@@ -141,17 +101,11 @@ package ua.com.syo.uitest.view.components
 			return _text;
 		}
 		
-		/**
-		 * Returns a reference to the internal text field in the component.
-		 */
 		public function get textField():TextField
 		{
 			return _tf;
 		}
 		
-		/**
-		 * Gets / sets whether or not this text component will be editable.
-		 */
 		public function set editable(b:Boolean):void
 		{
 			_editable = b;
@@ -162,9 +116,6 @@ package ua.com.syo.uitest.view.components
 			return _editable;
 		}
 		
-		/**
-		 * Gets / sets whether or not this text component will be selectable. Only meaningful if editable is false.
-		 */
 		public function set selectable(b:Boolean):void
 		{
 			_selectable = b;
@@ -175,9 +126,6 @@ package ua.com.syo.uitest.view.components
 			return _selectable;
 		}
 		
-		/**
-		 * Gets / sets whether or not text will be rendered as HTML or plain text.
-		 */
 		public function set html(b:Boolean):void
 		{
 			_html = b;
@@ -188,9 +136,6 @@ package ua.com.syo.uitest.view.components
 			return _html;
 		}
 
-        /**
-         * Sets/gets whether this component is enabled or not.
-         */
         public override function set enabled(value:Boolean):void
         {
             super.enabled = value;

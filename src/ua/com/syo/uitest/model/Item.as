@@ -7,7 +7,7 @@ package ua.com.syo.uitest.model
 		private var _text:String;
 		
 		
-		public function Item(name:String, text:String, img:String, date:Date = null)
+		public function Item(name:String, text:String, img:String)
 		{
 			this._name = name;
 			this._text = text;

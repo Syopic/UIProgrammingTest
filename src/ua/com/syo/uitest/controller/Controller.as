@@ -14,9 +14,10 @@ package ua.com.syo.uitest.controller
 
 	public class Controller extends EventDispatcher
 	{
+		// json locations
 		private var jsonData:Array = new Array("data/music.json", "data/moto.json", "data/lessons.json");
-		
-		private var _currentStageIndex:int = 1;
+		// current page
+		private var _currentStageIndex:int = 0;
 		
 		public function init():void {
 			Model.instance.init();
@@ -24,6 +25,9 @@ package ua.com.syo.uitest.controller
 			switchStage(_currentStageIndex);
 		}
 		
+		/**
+		 * Switch stage
+		 */
 		public function switchStage(index:int):void {
 			if (index < 0) index = jsonData.length - 1;
 			if (index >= jsonData.length) index = 0;
@@ -40,7 +44,6 @@ package ua.com.syo.uitest.controller
 		public function get currentStageIndex():int {
 			return _currentStageIndex;
 		}
-		
 		
 		/**
 		 * Singleton

@@ -1,15 +1,10 @@
 package ua.com.syo.uitest.view
 {
-	import flash.display.Bitmap;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.net.URLRequest;
 	
 	import ua.com.syo.uitest.model.DataStorage;
-	import ua.com.syo.uitest.model.Item;
 	import ua.com.syo.uitest.model.Record;
 	import ua.com.syo.uitest.view.components.Button;
 	import ua.com.syo.uitest.view.components.CheckBox;
@@ -60,13 +55,15 @@ package ua.com.syo.uitest.view
 		}
 		
 		private function hideSubCheckBoxHandler(event:MouseEvent):void {
-			trace(checkBox.selected);
 			expandingView.subcategoryVisible = !checkBox.selected;
 			if (!checkBox.selected) {
 				expandingView.setData(DataStorage.getCategories());
 			}
 		}
 		
+		/**
+		 * buttons handler
+		 */
 		private function onButtonHandler(event:MouseEvent):void {
 			var record:Record;
 			switch (event.currentTarget.label) {

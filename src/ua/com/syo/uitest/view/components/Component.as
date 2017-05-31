@@ -30,66 +30,36 @@ package ua.com.syo.uitest.view.components
 				parent.addChild(this);
 			}
 		}
-		
-		/**
-		 * Initilizes the component.
-		 */
+	
 		protected function init():void
 		{
 			addChildren();
 			invalidate();
 		}
 		
-		/**
-		 * Overriden in subclasses to create child display objects.
-		 */
 		protected function addChildren():void
 		{
 			
 		}
 		
-				
-		/**
-		 * Marks the component to be redrawn on the next frame.
-		 */
 		protected function invalidate():void
 		{
 			//			draw();
 			addEventListener(Event.ENTER_FRAME, onInvalidate);
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-		
-		/**
-		 * Utility method to set up usual stage align and scaling.
-		 */
 		public static function initStage(stage:Stage):void
 		{
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 		}
 		
-		/**
-		 * Moves the component to the specified position.
-		 * @param xpos the x position to move the component
-		 * @param ypos the y position to move the component
-		 */
 		public function move(xpos:Number, ypos:Number):void
 		{
 			x = Math.round(xpos);
 			y = Math.round(ypos);
 		}
 		
-		/**
-		 * Sets the size of the component.
-		 * @param w The width of the component.
-		 * @param h The height of the component.
-		 */
 		public function setSize(w:Number, h:Number):void
 		{
 			_width = w;
@@ -98,42 +68,22 @@ package ua.com.syo.uitest.view.components
 			invalidate();
 		}
 		
-		/**
-		 * Abstract draw function.
-		 */
 		public function draw():void
 		{
 			dispatchEvent(new Event(Component.DRAW));
 		}
 		
-		
-		
-		///////////////////////////////////
-		// event handlers
-		///////////////////////////////////
-		
-		/**
-		 * Called one frame after invalidate is called.
-		 */
 		protected function onInvalidate(event:Event):void
 		{
 			removeEventListener(Event.ENTER_FRAME, onInvalidate);
 			draw();
 		}
 		
-		
 		protected function getShadow(dist:Number, knockout:Boolean = false):DropShadowFilter
 		{
 			return new DropShadowFilter(dist, 45, Style.DROPSHADOW, 1, dist, dist, .3, 1, knockout);
 		}
 		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-		
-		/**
-		 * Sets/gets the width of the component.
-		 */
 		override public function set width(w:Number):void
 		{
 			_width = w;
@@ -144,10 +94,7 @@ package ua.com.syo.uitest.view.components
 		{
 			return _width;
 		}
-		
-		/**
-		 * Sets/gets the height of the component.
-		 */
+	
 		override public function set height(h:Number):void
 		{
 			_height = h;
@@ -160,25 +107,16 @@ package ua.com.syo.uitest.view.components
 			return _height;
 		}
 		
-		/**
-		 * Overrides the setter for x to always place the component on a whole pixel.
-		 */
 		override public function set x(value:Number):void
 		{
 			super.x = Math.round(value);
 		}
 		
-		/**
-		 * Overrides the setter for y to always place the component on a whole pixel.
-		 */
 		override public function set y(value:Number):void
 		{
 			super.y = Math.round(value);
 		}
 		
-		/**
-		 * Sets/gets whether this component is enabled or not.
-		 */
 		public function set enabled(value:Boolean):void
 		{
 			_enabled = value;

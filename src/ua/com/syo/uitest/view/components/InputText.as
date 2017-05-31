@@ -10,7 +10,6 @@ package ua.com.syo.uitest.view.components
 	public class InputText extends Component
 	{
 		protected var _back:Sprite;
-		protected var _password:Boolean = false;
 		protected var _text:String = "";
 		protected var _tf:TextField;
 		
@@ -23,19 +22,13 @@ package ua.com.syo.uitest.view.components
 				addEventListener(Event.CHANGE, defaultHandler);
 			}
 		}
-		
-		/**
-		 * Initializes the component.
-		 */
+
 		override protected function init():void
 		{
 			super.init();
 			setSize(100, 16);
 		}
 		
-		/**
-		 * Creates and adds child display objects.
-		 */
 		override protected function addChildren():void
 		{
 			_back = new Sprite();
@@ -52,16 +45,6 @@ package ua.com.syo.uitest.view.components
 			
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// public methods
-		///////////////////////////////////
-		
-		/**
-		 * Draws the visual ui of the component.
-		 */
 		override public function draw():void
 		{
 			super.draw();
@@ -69,8 +52,6 @@ package ua.com.syo.uitest.view.components
 			_back.graphics.beginFill(Style.BACKGROUND);
 			_back.graphics.drawRect(0, 0, _width, _height);
 			_back.graphics.endFill();
-			
-			_tf.displayAsPassword = _password;
 			
 			if(_text != null)
 			{
@@ -95,17 +76,6 @@ package ua.com.syo.uitest.view.components
 			_tf.y = Math.round(_height / 2 - _tf.height / 2);
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// event handlers
-		///////////////////////////////////
-		
-		/**
-		 * Internal change handler.
-		 * @param event The Event passed by the system.
-		 */
 		protected function onChange(event:Event):void
 		{
 			_text = _tf.text;
@@ -113,16 +83,6 @@ package ua.com.syo.uitest.view.components
 			dispatchEvent(event);
 		}
 		
-		
-		
-		
-		///////////////////////////////////
-		// getter/setters
-		///////////////////////////////////
-		
-		/**
-		 * Gets / sets the text shown in this InputText.
-		 */
 		public function set text(t:String):void
 		{
 			_text = t;
@@ -134,17 +94,11 @@ package ua.com.syo.uitest.view.components
 			return _text;
 		}
 		
-		/**
-		 * Returns a reference to the internal text field in the component.
-		 */
 		public function get textField():TextField
 		{
 			return _tf;
 		}
 		
-		/**
-		 * Gets / sets the list of characters that are allowed in this TextInput.
-		 */
 		public function set restrict(str:String):void
 		{
 			_tf.restrict = str;
@@ -154,9 +108,6 @@ package ua.com.syo.uitest.view.components
 			return _tf.restrict;
 		}
 		
-		/**
-		 * Gets / sets the maximum number of characters that can be shown in this InputText.
-		 */
 		public function set maxChars(max:int):void
 		{
 			_tf.maxChars = max;
@@ -166,22 +117,6 @@ package ua.com.syo.uitest.view.components
 			return _tf.maxChars;
 		}
 		
-		/**
-		 * Gets / sets whether or not this input text will show up as password (asterisks).
-		 */
-		public function set password(b:Boolean):void
-		{
-			_password = b;
-			invalidate();
-		}
-		public function get password():Boolean
-		{
-			return _password;
-		}
-
-        /**
-         * Sets/gets whether this component is enabled or not.
-         */
         public override function set enabled(value:Boolean):void
         {
             super.enabled = value;
