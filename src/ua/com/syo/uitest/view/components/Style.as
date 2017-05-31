@@ -1,4 +1,4 @@
-package ua.com.syo.uitest.components
+package ua.com.syo.uitest.view.components
 {
 	
 	public class Style

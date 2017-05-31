@@ -1,6 +1,6 @@
 package ua.com.syo.uitest.model
 {
-	public class Category implements ICategory
+	public class Category
 	{
 		private var _name:String;
 		private var _subcategories:Array = new Array();		

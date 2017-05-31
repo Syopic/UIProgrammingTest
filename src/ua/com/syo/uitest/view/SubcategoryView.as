@@ -3,9 +3,9 @@ package ua.com.syo.uitest.view
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
-	import ua.com.syo.uitest.components.Label;
-	import ua.com.syo.uitest.components.List;
-	import ua.com.syo.uitest.components.Panel;
+	import ua.com.syo.uitest.view.components.Label;
+	import ua.com.syo.uitest.view.components.List;
+	import ua.com.syo.uitest.view.components.Panel;
 	
 	public class SubcategoryView extends Panel
 	{

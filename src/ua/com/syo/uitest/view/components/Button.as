@@ -1,10 +1,10 @@
-package ua.com.syo.uitest.components
+package ua.com.syo.uitest.view.components
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
-	import ua.com.syo.uitest.components.Component;
+	import ua.com.syo.uitest.view.components.Component;
 	
 	public class Button extends Component
 	{

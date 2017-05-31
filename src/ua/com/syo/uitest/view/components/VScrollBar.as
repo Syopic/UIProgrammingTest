@@ -1,6 +1,6 @@
 
 
-package ua.com.syo.uitest.components
+package ua.com.syo.uitest.view.components
 {
 	import flash.display.DisplayObjectContainer;
 	

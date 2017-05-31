@@ -3,11 +3,11 @@ package ua.com.syo.uitest.view {
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
 	
-	import ua.com.syo.uitest.components.Component;
-	import ua.com.syo.uitest.components.List;
-	import ua.com.syo.uitest.components.ScrollPane;
-	import ua.com.syo.uitest.components.VBox;
-	import ua.com.syo.uitest.components.Window;
+	import ua.com.syo.uitest.view.components.Component;
+	import ua.com.syo.uitest.view.components.List;
+	import ua.com.syo.uitest.view.components.ScrollPane;
+	import ua.com.syo.uitest.view.components.VBox;
+	import ua.com.syo.uitest.view.components.Window;
 	import ua.com.syo.uitest.model.Category;
 	import ua.com.syo.uitest.model.Item;
 

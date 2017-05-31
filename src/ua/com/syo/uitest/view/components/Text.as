@@ -1,4 +1,4 @@
-package ua.com.syo.uitest.components
+package ua.com.syo.uitest.view.components
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
@@ -6,7 +6,7 @@ package ua.com.syo.uitest.components
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 	
-	import ua.com.syo.uitest.components.Component;
+	import ua.com.syo.uitest.view.components.Component;
 	
 	[Event(name="change", type="flash.events.Event")]
 	public class Text extends Component

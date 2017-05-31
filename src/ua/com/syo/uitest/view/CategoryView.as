@@ -4,10 +4,10 @@ package ua.com.syo.uitest.view
 	import flash.events.Event;
 	import flash.text.TextFormat;
 	
-	import ua.com.syo.uitest.components.Label;
-	import ua.com.syo.uitest.components.List;
-	import ua.com.syo.uitest.components.Style;
-	import ua.com.syo.uitest.components.Window;
+	import ua.com.syo.uitest.view.components.Label;
+	import ua.com.syo.uitest.view.components.List;
+	import ua.com.syo.uitest.view.components.Style;
+	import ua.com.syo.uitest.view.components.Window;
 	import ua.com.syo.uitest.model.Category;
 	import ua.com.syo.uitest.model.SubCategory;
 	

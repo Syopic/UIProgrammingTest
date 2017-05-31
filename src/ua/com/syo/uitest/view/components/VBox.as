@@ -1,11 +1,11 @@
 ﻿ 
-package ua.com.syo.uitest.components
+package ua.com.syo.uitest.view.components
 {
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     import flash.events.Event;
     
-    import ua.com.syo.uitest.components.Component;
+    import ua.com.syo.uitest.view.components.Component;
 
 	[Event(name="resize", type="flash.events.Event")]
 	public class VBox extends Component
